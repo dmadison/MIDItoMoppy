@@ -1,0 +1,42 @@
+#######################################
+# Syntax Coloring Map For MIDItoMoppy
+#######################################
+
+#######################################
+# Datatypes (KEYWORD1)
+#######################################
+
+MIDItoMoppy	KEYWORD1
+
+#######################################
+# Methods and Functions (KEYWORD2)
+#######################################
+
+setResolution	KEYWORD2
+getResolution	KEYWORD2
+getPeriod	KEYWORD2
+getPin	KEYWORD2
+
+checkChannel	KEYWORD2
+checkRange	KEYWORD2
+checkInputs	KEYWORD2
+
+checkMIDIChannel	KEYWORD2
+checkMIDIRange	KEYWORD2
+checkMIDIInputs	KEYWORD2
+
+getResolution	KEYWORD2
+sendMoppy	KEYWORD2
+sendNoteOn	KEYWORD2
+sendNoteOff	KEYWORD2
+
+resetResolution	KEYWORD2
+reset	KEYWORD2
+
+#######################################
+# Instances (KEYWORD2)
+#######################################
+
+#######################################
+# Constants (LITERAL1)
+#######################################
