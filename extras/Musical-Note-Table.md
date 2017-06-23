@@ -110,3 +110,6 @@ G<sup>#</sup><sub>8</sub>/A<sup>b</sup><sub>8</sub> | 6644.88 |    5.19 |   150 
 A<sub>8</sub>                                       |    7040 |     4.9 |   142 |   1
 A<sup>#</sup><sub>8</sub>/B<sup>b</sup><sub>8</sub> | 7458.62 |    4.63 |   134 |   1
 B<sub>8</sub>                                       | 7902.13 |    4.37 |   127 |   1
+
+Note Source: http://www.phy.mtu.edu/~suits/notefreqs.html
+
