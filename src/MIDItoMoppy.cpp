@@ -64,7 +64,7 @@ uint16_t MIDItoMoppy::getPeriod(uint8_t note){
 	return (moppyNotes[note - NoteOffset]);
 }
 
-static uint16_t MIDItoMoppy::getPeriod(uint8_t note, uint16_t resolution){
+uint16_t MIDItoMoppy::getPeriod(uint8_t note, uint16_t resolution){
 	if(!checkRange(note) || resolution == 0){
 		return 0;
 	}
@@ -74,7 +74,7 @@ static uint16_t MIDItoMoppy::getPeriod(uint8_t note, uint16_t resolution){
 	return (pgm_read_word_near(MicroPeriods + (note - NoteOffset)) / (resolution * 2));
 }
 
-static int8_t MIDItoMoppy::getPin(uint8_t channel){
+int8_t MIDItoMoppy::getPin(uint8_t channel){
 	if(!checkChannel(channel)){
 		return -1; // No valid drive
 	}
@@ -82,7 +82,7 @@ static int8_t MIDItoMoppy::getPin(uint8_t channel){
 	return (channel * 2); // Stepper pin is double the channel number
 }
 
-static boolean MIDItoMoppy::checkChannel(uint8_t channel){
+boolean MIDItoMoppy::checkChannel(uint8_t channel){
 	// Channels 1 - 16 (MIDI notation)
 	// Max channel is 9 (Arduino Uno)
 	if(channel == 0 || channel > 9){
@@ -92,7 +92,7 @@ static boolean MIDItoMoppy::checkChannel(uint8_t channel){
 	return true;
 }
 
-static boolean MIDItoMoppy::checkRange(uint8_t note){
+boolean MIDItoMoppy::checkRange(uint8_t note){
 	if(note < NoteOffset || note >= (NoteOffset + NoteRange)){
 		return false;
 	}
@@ -100,7 +100,7 @@ static boolean MIDItoMoppy::checkRange(uint8_t note){
 	return true;
 }
 
-static boolean MIDItoMoppy::checkInputs(uint8_t channel, uint8_t note){
+boolean MIDItoMoppy::checkInputs(uint8_t channel, uint8_t note){
 	if(checkChannel(channel) && checkRange(note)){
 		return true;
 	}
@@ -108,7 +108,7 @@ static boolean MIDItoMoppy::checkInputs(uint8_t channel, uint8_t note){
 	return false;
 }
 
-static boolean MIDItoMoppy::checkMIDIChannel(uint8_t channel){
+boolean MIDItoMoppy::checkMIDIChannel(uint8_t channel){
 	if(channel == 0 || channel > 16){
 		return false;
 	}
@@ -116,7 +116,7 @@ static boolean MIDItoMoppy::checkMIDIChannel(uint8_t channel){
 	return true;
 }
 
-static boolean MIDItoMoppy::checkMIDIRange(uint8_t note){
+boolean MIDItoMoppy::checkMIDIRange(uint8_t note){
 	if(note > 127){
 		return false;
 	}
@@ -124,7 +124,7 @@ static boolean MIDItoMoppy::checkMIDIRange(uint8_t note){
 	return true;
 }
 
-static boolean MIDItoMoppy::checkMIDIInputs(uint8_t channel, uint8_t note){
+boolean MIDItoMoppy::checkMIDIInputs(uint8_t channel, uint8_t note){
 	if(checkMIDIChannel(channel) && checkMIDIRange(note)){
 		return true;
 	}
@@ -132,7 +132,7 @@ static boolean MIDItoMoppy::checkMIDIInputs(uint8_t channel, uint8_t note){
 	return false;
 }
 
-static void MIDItoMoppy::sendMoppy(Stream &port, uint8_t pin, uint16_t period){
+void MIDItoMoppy::sendMoppy(Stream &port, uint8_t pin, uint16_t period){
 	port.write(pin);
 	port.write(period >> 8 & 0xFF);
 	port.write(period & 0xFF);
@@ -161,7 +161,7 @@ void MIDItoMoppy::sendNoteOff(uint8_t channel, uint8_t note){
 	sendNoteOff(*SerialPort, channel, note);
 }
 
-static void MIDItoMoppy::sendNoteOn(Stream &port, uint8_t channel, uint8_t note){
+void MIDItoMoppy::sendNoteOn(Stream &port, uint8_t channel, uint8_t note){
 	int8_t pin = getPin(channel);
 	if(pin < 0){ return; }
 
@@ -171,7 +171,7 @@ static void MIDItoMoppy::sendNoteOn(Stream &port, uint8_t channel, uint8_t note)
 	sendMoppy(port, pin, period);
 }
 
-static void MIDItoMoppy::sendNoteOff(Stream &port, uint8_t channel, uint8_t note){
+void MIDItoMoppy::sendNoteOff(Stream &port, uint8_t channel, uint8_t note){
 	int8_t pin = getPin(channel);
 	if(pin < 0){ return; }
 
